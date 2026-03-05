@@ -1,0 +1,139 @@
+/* CSS 變數系統，方便未來一鍵換色 */
+:root {
+    --bg-gradient-1: #4158D0;
+    --bg-gradient-2: #C850C0;
+    --bg-gradient-3: #FFCC70;
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    --text-color: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 背景漸層，會透過 JS 動態改變 */
+    background-image: linear-gradient(43deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 46%, var(--bg-gradient-3) 100%);
+    overflow: hidden;
+    position: relative;
+    color: var(--text-color);
+    transition: background-image 1s ease;
+}
+
+/* 背景浮動光球動畫 */
+.background-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+}
+.shape-1 {
+    width: 350px;
+    height: 350px;
+    background: #ff00cc;
+    top: -10%;
+    left: 15%;
+    animation: float 8s ease-in-out infinite;
+}
+.shape-2 {
+    width: 450px;
+    height: 450px;
+    background: #00e1ff;
+    bottom: -15%;
+    right: 10%;
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-40px) scale(1.1); }
+    100% { transform: translateY(0px) scale(1); }
+}
+
+/* 核心玻璃卡片設計 */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 3.5rem 4rem;
+    box-shadow: var(--glass-shadow);
+    text-align: center;
+    max-width: 90%;
+    width: 480px;
+    /* 準備給 JS 控制 3D 視差效果 */
+    transform-style: preserve-3d;
+    transition: box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+}
+
+#greeting {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.clock-container {
+    font-size: 3.5rem;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+    margin: 1.5rem 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+    letter-spacing: 1.5px;
+}
+
+/* 互動按鈕微動畫 */
+.interact-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--glass-border);
+    padding: 12px 28px;
+    border-radius: 30px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.interact-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.interact-btn:active {
+    transform: translateY(0);
+}
